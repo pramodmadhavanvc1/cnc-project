@@ -1,0 +1,237 @@
+{% extends "layout.html" %}
+
+{% block y %}
+{% if session.name %}
+<style>
+  input[type=text], select {
+    width: 20%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  input[type=submit] {
+    width: 10%;
+    background-color:  #04AA6D;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  input[type=submit]:hover {
+    background-color:  #45a049;
+  }
+  
+  .divback {
+    border-radius: 10px;
+    background-color: #f5f6f8;
+    padding: 20px;
+    margin: 10px;
+    position: relative;
+    height:auto;
+  }
+
+  
+
+  .button1 {
+  background-color:#04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 20%;
+  opacity: 0.9;
+}
+
+.button1:hover {
+  opacity:1;
+}
+
+/* Float cancel and delete buttons and add an equal width */
+.cancelbtn, .deletebtn {
+  float: left;
+  width: 50%;
+}
+
+/* Add a color to the cancel button */
+.cancelbtn {
+  background-color: #ccc;
+  width: 50px;
+  font-weight: bold;
+  color: black;
+}
+
+/* Add a color to the delete button */
+.deletebtn {
+  background-color: #f44336;
+  font-weight: bold;
+  width: 50px;
+}
+
+/* Add padding and center-align text to the container */
+.container {
+  padding: 16px;
+  text-align: center;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position:fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 30%;
+  top: 50%;
+  width: 410px; /* Full width */
+  height: 160px; /* Full height */
+  overflow:visible; /* Enable scroll if needed */
+  background-color: #04AA6D;
+  padding-top: 50px;
+  border-radius: 15px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+   /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 400px; /* Could be more or less, depending on screen size */
+  height: 150px;
+  margin-left: 5px;
+  margin-top: -45px;
+  border-radius:15px ;
+}
+
+/* Style the horizontal ruler */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+ 
+p {
+  text-align: center;
+  font-style: italic;
+  font-weight:bold;
+
+}
+/* The Modal Close Button (x) */
+.close {
+  position: absolute;
+  right: 35px;
+  top: 15px;
+  font-size: 40px;
+  font-weight: bold;
+  color: #f1f1f1;
+}
+
+.close:hover,
+.close:focus {
+  color: #f44336;
+  cursor: pointer;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Change styles for cancel button and delete button on extra small screens */
+@media screen and (max-width: 500px) {
+  .cancelbtn, .deletebtn {
+     width: 200%;
+  }
+}
+
+
+ 
+  
+  </style>
+<div class="Home">
+    <h1></h1>
+    <div class="navbar">
+      <a href="/home"><img src="/static/home.png"> Home</a>
+
+      <div class="dropdown">
+        <!-- <a class="active" href="/transfer"><img src="/static/fund-trans.png"> Fund Transfer</a> -->
+        <button class="dropbtn active"><img src="/static/fund-trans.png"> Fund Transfer</a>
+          <i class="fa fa-caret-down icon1"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="/transfer">Transfer</a>
+          <a href="/onetime-transfer">One Time Transfer</a>
+          <a href="/add-beneficiary">Add Benificary</a>
+          <a href="/delete-beneficiary">Delete Benificary</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="dropbtn1"><img src="/static/recent-trans.png"> Transactions</a>
+          <i class="fa fa-caret-down icon1"></i>
+        </button>
+        <div class="dropdown-content">
+           <a href="/recent-transactions">Recent</a>
+          <a href="/detailed-transactions">Detailed</a>
+        </div>
+      </div> 
+      <a href=/cards><img src="/static/cards.png"> cards</a>
+      <a href="/logout"><img src="/static/logout.png"> Logout ({{logedin_user}})</a>
+      </div>
+    <!-- <div class="row"> -->
+      <div>
+        {% if deletemsg %}
+        <div align="center" class="alert alert-warning alert-dismissible fade show" role="alert">
+          <strong>{{ deletemsg }}</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onclick="window.location.href='/delete-beneficiary'"></button>
+        </div>
+        {% endif %}
+        
+      <div class="divback">
+        {% if messages %}
+        <form action="{{ url_for('delete_beneficiary') }}" method="post" >
+          <h2>Delete Beneficiary</h2>
+          <select name="Benificary">
+            <option >Choose Account:</option>
+          {% for row in data %}
+            {% for cell in row %}
+            <option value="{{ cell }}" >{{ cell }}</option>
+          {% endfor %}
+          {% endfor %}
+          </select>
+          <br>
+        
+        <br><input type="text" id="lname" name="confirmation" placeholder="Type yes" required>
+        <br><input type="submit" formaction="/api/v1/delete-beneficiary" value="Delete">
+  </form>
+</div>
+{% endif %}
+        <h4 align="center">{{messages1}}</h4>
+      </div> 
+      </div> 
+      
+<!-- partial -->
+  <script  src="/static/script.js"></script>
+
+ 
+ <script>
+ 
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+
+</script>
+{% else %}
+<meta http-equiv="refresh" content="2 ; url =/login" /> 
+	You are not Register. <a href="/login">login</a>.
+{% endif %}
+{% endblock %}

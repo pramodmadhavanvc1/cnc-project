@@ -1,0 +1,118 @@
+{% extends "layout.html" %}
+
+{% block y %}
+{% if session.name %}
+<style>
+  input[type=text], select {
+    width: 20%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  input[type=submit] {
+    width: 10%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  input[type=submit]:hover {
+    background-color: #45a049;
+  }
+  
+  .divback {
+    border-radius: 10px;
+    background-color: #f5f6f8;
+    padding: 20px;
+    margin: 10px;
+    position: relative;
+    height:auto;
+  }
+
+  
+
+
+ 
+  
+  </style>
+<div class="Home">
+    <h1></h1>
+    <div class="navbar">
+      <a href="/home"><img src="/static/home.png"> Home</a>
+
+      <div class="dropdown">
+        <!-- <a class="active" href="/transfer"><img src="/static/fund-trans.png"> Fund Transfer</a> -->
+        <button class="dropbtn1"><img src="/static/fund-trans.png"> Fund Transfer</a>
+          <i class="fa fa-caret-down icon1"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="/transfer">Transfer</a>
+          <a href="/onetime-transfer">One Time Transfer</a>
+          <a href="/add-beneficiary">Add Benificary</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="dropbtn active"><img src="/static/recent-trans.png"> Transactions</a>
+          <i class="fa fa-caret-down icon1"></i>
+        </button>
+        <div class="dropdown-content">
+           <a href="/recent-transactions">Recent</a>
+          <a href="/detailed-transactions">Detailed</a>
+        </div>
+      </div> 
+
+
+      <a href=/cards><img src="/static/cards.png"> cards</a>
+      <a href="/logout"><img src="/static/logout.png"> Logout ({{logedin_user}})</a>
+      </div>
+    <!-- <div class="row"> -->
+      <div>
+        {% if transfermsg %}
+        <div align="center" class="alert alert-warning alert-dismissible fade show" role="alert">
+          <strong>{{ transfermsg }}</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onclick="window.location.href='/transfer'"></button>
+        </div>
+        {% endif %}
+      <div class="divback">
+       <form action="{{ url_for('onetime_transfer') }}" method="post" >
+          <h3>Detailed Statment upto 6 months</h3>
+          <select name="months">
+            <option >Select Month:</option>
+            <option value="1" >1</option>
+            <option value="2" >2</option>
+            <option value="3" >3</option>
+            <option value="4" >4</option>
+            <option value="5" >5</option>
+            <option value="6" >6</option>
+          </select>
+          <br>
+          <br>
+          <input type="submit" formaction="/api/v1/detailed-transactions" value="Download" onclick="openPopup()">
+        </form>
+        <h4 align="center">{{messages1}}</h4>
+      </div> 
+      </div> 
+      
+<!-- partial -->
+  <script  src="/static/script.js"></script>
+
+ <!-- Welcome to Citibank {{ session.name }} <a href="/logout">logout</a>. -->
+ <script>
+ 
+
+
+</script>
+{% else %}
+<meta http-equiv="refresh" content="2 ; url =/login" /> 
+	You are not Register. <a href="/login">login</a>.
+{% endif %}
+{% endblock %}

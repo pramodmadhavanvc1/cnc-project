@@ -1,0 +1,207 @@
+{% extends "layout.html" %}
+
+{% block y %}
+{% if session.name %}
+<style>
+  .gfg {
+            border-radius: -50px;   
+            margin: 2%;
+            position: relative;
+         
+                
+        }
+  
+        .card-number {
+            position:absolute;
+            top: 100px;
+            left: 50px;
+            right: 50px;
+            font-weight: bold;
+            font-family: "Lucida Console", "Courier New", monospace;
+        }
+  
+        .card-startdate {
+            position: absolute;
+            top: 125px;
+            left: 10px;
+            right: 170px;
+            font-weight: bold;
+        }
+        .card-enddate {
+          position: absolute;
+            top: 125px;
+            left: 70px;
+            right: 50px;
+            font-weight: bold;
+        }
+  
+        .card-name {
+          position: absolute;
+            top: 148px;
+            left: 30px;
+            right: 80px;
+            font-weight: bold;
+            font-family: "Lucida Console", "Courier New", monospace;
+        }
+       
+.toggle {
+      --width: 70px;
+      --height: calc(var(--width) / 2);
+
+      position: relative;
+      display: inline-block;
+      width: var(--width);
+      height: var(--height);
+      box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+      border-radius: var(--height);
+      cursor: pointer;
+    }
+
+    .toggle input {
+      display: none;
+    }
+
+    .toggle .slider {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: var(--height);
+      background-color: #ccc;
+      transition: all 0.4s ease-in-out;
+    }
+
+    .toggle .slider::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: calc(var(--height));
+      height: calc(var(--height));
+      border-radius: calc(var(--height) / 2);
+      background-color: #fff;
+      box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+      transition: all 0.4s ease-in-out;
+    }
+
+    .toggle input:checked+.slider {
+      background-color: #2196f3;
+    }
+
+    .toggle input:checked+.slider::before {
+      transform: translateX(calc(var(--width) - var(--height)));
+    }
+
+    .toggle .labels {
+      position: absolute;
+      top: 8px;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      font-size: 12px;
+      font-family: sans-serif;
+      transition: all 0.4s ease-in-out;
+      overflow: hidden;
+    }
+
+    .toggle .labels::after {
+      content: attr(data-off);
+      position: absolute;
+      right: 5px;
+      color: #4d4d4d;
+      opacity: 1;
+      font-weight: bold;
+      font-size:medium;
+      font-family: "Lucida Console", "Courier New", monospace;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+      transition: all 0.4s ease-in-out;
+    }
+
+    .toggle .labels::before {
+      content: attr(data-on);
+      position: absolute;
+      left: calc(var(--height) - var(--width) + 2px);
+      color: #ffffff;
+      opacity: 0;
+      font-weight: bold;
+      font-size: large;
+      font-family: "Lucida Console", "Courier New", monospace;
+      text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.4);
+      transition: all 0.4s ease-in-out;
+    }
+
+    .toggle input:checked~.labels::after {
+      opacity: 0;
+      transform: translateX(calc(var(--width) - var(--height)));
+    }
+
+    .toggle input:checked~.labels::before {
+      opacity: 1;
+      transform: translateX(calc(var(--width) - var(--height)));
+    }
+  </style>
+<div class="Home">
+    <h1></h1>
+    <div class="navbar">
+      <a  href="/home"><img src="/static/home.png"> Home</a>
+
+      <div class="dropdown">
+        <button class="dropbtn1"><img src="/static/fund-trans.png"> Fund Transfer</a>
+          <i class="fa fa-caret-down icon1"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="/transfer">Transfer</a>
+          <a href="/onetime-transfer">One Time Transfer</a>
+          <a href="/add-beneficiary">Add Benificary</a>
+          <a href="/delete-beneficiary">Delete Benificary</a>
+        </div>
+      </div> 
+
+      
+      <div class="dropdown">
+        <button class="dropbtn1"><img src="/static/recent-trans.png"> Transactions</a>
+          <i class="fa fa-caret-down icon1"></i>
+        </button>
+        <div class="dropdown-content">
+           <a href="/recent-transactions">Recent</a>
+          <a href="/detailed-transactions">Detailed</a>
+        </div>
+      </div> 
+      
+      <a class="active" href=/cards><img src="/static/cards.png"> cards</a>
+        <a href="/logout"><img src="/static/logout.png"> Logout ({{logedin_user}})</a>
+    </div>
+    <div align = "center" class="gfg">
+      <img src="/static/card.png">
+      {% if card_num %}
+      <h5 class="card-number">
+        {{card_num}}
+      </h5>
+      <h6 class="card-startdate">
+        {{card_start}}
+      </h6>
+      <h6 class="card-enddate">
+        {{card_end}}
+      </h6>
+      <h6 class="card-name">
+        {{card_name}}
+      </h6>
+      <br>
+      <br>
+      <h6><b>Show CVV</b></h6>
+      <label class="toggle">
+        <input type="checkbox">
+        <span class="slider"></span>
+        <span class="labels" data-on={{card_cvv}} data-off="OFF"></span>
+      </label>
+      {% endif %}   
+  </div>
+ </div>
+<!-- partial -->
+  <script  src="/static/script.js"></script>
+{% else %}
+<meta http-equiv="refresh" content="2 ; url =/login" /> 
+	You are not Register. <a href="/login">login</a>.
+{% endif %}
+{% endblock %}

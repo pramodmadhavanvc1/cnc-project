@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+
+
+{% block y %}
+
+{% if session.name %}
+<div class="Home">
+    {% if loginmsg %}
+      <div align="center" class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>{{ loginmsg }}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {% endif %}
+     <h1></h1>
+     <div class="navbar">
+      <a  class="active"  href="/home"><img src="/static/home.png"> Home</a>
+
+      <div class="dropdown">
+        <button class="dropbtn1"><img src="/static/fund-trans.png"> Fund Transfer</a>
+          <i class="fa fa-caret-down icon1"></i>
+        </button>
+        <div class="dropdown-content">
+           <a href="/transfer">Transfer</a>
+          <a href="/onetime-transfer">One Time Transfer</a>
+          <a href="/add-beneficiary">Add Benificary</a>
+          <a href="/delete-beneficiary">Delete Benificary</a>
+        </div>
+      </div> 
+
+      <div class="dropdown">
+        <button class="dropbtn1"><img src="/static/recent-trans.png"> Transactions</a>
+          <i class="fa fa-caret-down icon1"></i>
+        </button>
+        <div class="dropdown-content">
+           <a href="/recent-transactions">Recent</a>
+          <a href="/detailed-transactions">Detailed</a>
+        </div>
+      </div> 
+
+      <a href=/cards><img src="/static/cards.png"> cards</a>
+        <a href="/logout"><img src="/static/logout.png"> Logout ({{logedin_user}})</a>
+    </div>
+    
+    <!-- <div class="row"> -->
+  <div class="side">
+   <!--  {% if username_session %} -->
+    <h3><b>Account Details of {{ username_session }}</b></h3>
+    <h4><b>Name:</b> {{ username }}</h4>
+    <h4><b>Account Number:</b> {{ Accnumber }}</h4>
+    <h4><b>Account Balance:</b> SGD {{ Accbalance }}</h4>
+    <!-- {% endif %} -->
+ </div>
+</div> 
+<!-- partial -->
+  <script  src="/static/script.js"></script>
+
+ <!-- Welcome to Citibank {{ session.name }} <a href="/logout">logout</a>. -->
+ 
+{% else %}
+<meta http-equiv="refresh" content="2 ; url =/login" /> 
+	You are not Register. <a href="/login">login</a>.
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,121 @@
+{% extends "layout.html" %}
+
+{% block y %}
+
+<div class="login-form">
+  <!--- <form method="post"> --->
+    <form action="{{ url_for('register') }}" method="post">
+      <!-- <div class="msg" align="center"><strong>{{ msg1 }}</strong></div> -->
+      {% if msg1 %}
+      <div align="center" class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>{{ msg1 }}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {% endif %}
+    <br>
+    <h2 align = 'center'>Account Registration</h2>
+    <img src="/static/sm-logo-blue .png">
+    <br>
+    <br>
+    <div class="content">
+      <div class="input-field">
+        <div class="input-icons">
+          <i class="fa fa-user icon"></i>
+          </div>
+        <input type="Name" name="username" placeholder="UserName" autocomplete="nope" value="{{username}}">
+      </div>
+      <div class="input-field">
+        <div class="input-icons">
+          <i class="fa fa-user icon"></i>
+          </div>
+        <input type="Name" name="fullname" placeholder="Full Name" autocomplete="nope" value="{{fullname}}">
+      </div>
+      <div class="input-field">
+          <div class="input-icons">
+            <i class="fa fa-lock icon"></i>
+            </div>
+        <input type="password" name="password1" placeholder="Password" autocomplete="new-password">
+      </div>
+      <div class="input-field">
+          <div class="input-icons">
+            <i class="fa fa-lock icon"></i>
+            </div>
+        <input type="password" name="password2" placeholder="Re-Enter Password" autocomplete="new-password">
+      </div>
+      <div class="input-field">
+        <div class="input-icons">
+          <i class="fa fa-envelope icon"></i>
+          </div>
+        <input type="email" name="email" placeholder="Email" autocomplete="nope" value="{{email}}">
+      </div>
+    </div>
+
+    <div class="action ">
+      <button formaction="/" CausesValidation="false" type="submit"  >SignIn</button>
+      <button type="submit" formaction="/user_register" >Register</button>
+      
+    </div>
+
+  </form>
+  
+</div>
+<!-- partial -->
+  <script  src="/static/script.js"></script>
+  <script>
+    function myFunction() {
+      alert("User Registration sucess, Please login");
+    }
+    </script>
+
+{% endblock %}
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" >
+  <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Rubik:400,700'><link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<!-- partial:index.partial.html -->  
+<div class="login-form">
+  <!--- <form method="post"> --->
+    <form action="{{ url_for('register') }}" method="post">
+      <!-- <div class="msg" align="center"><strong>{{ msg1 }}</strong></div> -->
+      {% if msg1 %}
+      <div align="center" class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>{{ msg1 }}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {% endif %}
+    <h1>Register</h1>
+    <div class="content">
+      <div class="input-field">
+        <input type="Name" name="username" placeholder="UserName" autocomplete="nope" required>
+      </div>
+      <div class="input-field">
+        <input type="password" name="password" placeholder="Password" autocomplete="new-password">
+      </div>
+      <div class="input-field">
+        <input type="email" name="email" placeholder="Email" autocomplete="nope">
+      </div>
+    </div>
+    <div class="action ">
+      <button type="submit" formaction="/user_register" >Register</button>
+    </div>
+
+  </form>
+</div>
+<!-- partial -->
+  <script  src="/static/script.js"></script>
+  <script>
+    function myFunction() {
+      alert("User Registration sucess, Please login");
+    }
+    </script>
+
+</body>
+</html>

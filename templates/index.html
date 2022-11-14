@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block y %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="login-form">
+  <form action="{{ url_for('home') }}" method="post">
+    {% if loginmsg %}
+      <div align="center" class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>{{ loginmsg }}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {% endif %}
+      <img src="/static/sm-logo-blue .png">
+   <div class="content">
+      <div class="input-field">
+        <div class="input-icons">
+          <i class="fa fa-user icon"></i>
+          </div>
+        <input type="Name" name="username" placeholder="UserName" autocomplete="nope">
+      </div>
+      <div class="input-field">
+        <div class="input-icons">
+          <i class="fa fa-lock icon"></i>
+          </div>
+        <input type="password" name="password" placeholder="Password" autocomplete="new-password">
+      </div>
+      <a href="#" class="link">Forgot Your Password?</a>
+    </div>
+  <div class="action">
+      <button  formaction="/register" type="submit">Register</button>
+      <button type="submit" formaction="/login">Sign in</button>
+  </div>
+  </form>
+</div>
+<!-- partial -->
+  <script  src="/static/script.js"></script>
+
+{% endblock %}

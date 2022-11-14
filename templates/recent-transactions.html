@@ -1,0 +1,91 @@
+{% extends "layout.html" %}
+
+{% block y %}
+{% if session.name %}
+<style>
+  #customers {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 99%;
+    margin: 5px;
+  }
+  
+  #customers td, #customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  #customers tr:nth-child(even){background-color: #f2f2f2;}
+  
+  #customers tr:hover {background-color: #ddd;}
+  
+  #customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
+  }
+  </style>
+<div class="Home">
+    <h1> </h1>
+    <div class="navbar">
+      <a href="/home"><img src="/static/home.png"> Home</a>
+
+      <div class="dropdown">
+        <button class="dropbtn1"><img src="/static/fund-trans.png"> Fund Transfer</a>
+          <i class="fa fa-caret-down icon1"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="/transfer">Transfer</a>
+          <a href="/onetime-transfer">One Time Transfer</a>
+          <a href="/add-beneficiary">Add Benificary</a>
+          <a href="/delete-beneficiary">Delete Benificary</a>
+        </div>
+      </div> 
+
+      
+      <div class="dropdown">
+        <button class="dropbtn active"><img src="/static/recent-trans.png"> Transactions</a>
+          <i class="fa fa-caret-down icon1"></i>
+        </button>
+        <div class="dropdown-content">
+           <a href="/recent-transactions">Recent</a>
+          <a href="/detailed-transactions">Detailed</a>
+        </div>
+      </div> 
+	    <a href=/cards><img src="/static/cards.png"> cards</a>
+      <a href="/logout"><img src="/static/logout.png"> Logout ({{logedin_user}})</a>
+    </div>
+    <table id="customers">
+      <tr>
+        <th>Transaction ID</th>
+        <th>From Acc Name</th>
+        <th>From Acc No</th>
+        <th>TO Acc No</th>
+        <th>Amount transfered</th>
+        <th>Transactions Type</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Acc Balance</th>
+      </tr>
+      {% if messages %}
+      {% for row in data %}
+      <tr>
+          {% for cell in row %}
+          <td>{{ cell }}</td>
+          {% endfor %}
+        </tr>
+      {% endfor %}
+      <h4 align="center">{{messages}}</h4>
+      {% endif %}
+      <h4 align="center">{{messages1}}</h4>
+    </table>
+  </div> 
+<!-- partial -->
+  <script  src="/static/script.js"></script>
+{% else %}
+<meta http-equiv="refresh" content="2 ; url =/login" /> 
+	You are not Register. <a href="/login">login</a>.
+{% endif %}
+{% endblock %}

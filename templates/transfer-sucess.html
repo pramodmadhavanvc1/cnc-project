@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+
+{% block y %}
+{% if session.name %}
+  </style>
+<div class="Home">
+    <h1> Welcome To CitiBank</h1>
+    <div class="navbar">
+      <a href="/home"><img src="/static/home.png"> Home</a>
+
+      <div class="dropdown">
+        <button class="dropbtn1"><img src="/static/fund-trans.png"> Fund Transfer</a>
+          <i class="fa fa-caret-down icon1"></i>
+        </button>
+        <div class="dropdown-content">
+           <a href="/transfer">Transfer</a>
+          <a href="/onetime-transfer">One Time Transfer</a>
+          <a href="/add-beneficiary">Add Benificary</a>
+        </div>
+      </div> 
+      
+      <div class="dropdown">
+        <button class="dropbtn1"><img src="/static/recent-trans.png"> Transactions</a>
+          <i class="fa fa-caret-down icon1"></i>
+        </button>
+        <div class="dropdown-content">
+           <a href="/recent-transactions">Recent</a>
+          <a href="/detailed-transactions">Detailed</a>
+        </div>
+      </div> 
+      
+      <a href=/cards><img src="/static/cards.png"> cards</a>
+      <a href="/logout"><img src="/static/logout.png"> Logout</a>
+    </div>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <div class="sucess">
+         <img src="/static/tick.png">
+         <h2>Thank you</h2>
+         <h4>Sucessfully Transfered<br>To: {{accname}} <br>Acc Number:  {{accnumber}}<br>Amount: SGD {{transamount}}<br>Transaction ID: {{transcation_id}}</h4>
+         <button type="button" a href="/home" class="btn"  onclick="window.location.href='/home'">OK</button>
+        </div>
+    
+ 
+     </div> 
+<!-- partial -->
+  <script  src="/static/script.js"></script>
+  <script>
+    if ( window.history.replaceState ) {
+      window.history.replaceState( null, null, window.location.href );
+    }
+    </script>
+{% else %}
+<meta http-equiv="refresh" content="2 ; url =/login" /> 
+	You are not Register. <a href="/login">login</a>.
+{% endif %}
+{% endblock %}
